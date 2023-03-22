@@ -82,6 +82,7 @@ void espera(uint32_t milissegundos) {
 
 Ambiente::Ambiente(uint8_t linhas, uint8_t colunas, uint8_t obstaculos): lin(linhas), col(colunas) {
     area.assign(lin*col, PosStatus::Livre);
+    srand(clock());
     while (obstaculos > 0) {
         Posicao pos{static_cast<uint8_t>(rand()% lin), static_cast<uint8_t>(rand()% col)};
         auto rpos = calc_pos(pos).value();

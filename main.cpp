@@ -8,11 +8,7 @@ const int PASSO = 250;
 int main(int c, char *v[])
 {
     // Cria um espaço com 16 colunas e 16 linhas, e 3 obstáculos
-    Ambiente sala(16, 16, 3);
-
-//    sala.visita(Posicao{10,7});
-//    sala.mostra(std::cout);
-//    return 0;
+    Ambiente sala(16, 16, 5);
 
     // Cria um robo, que deve percorrer o ambiente especificado
     Robo robo(sala);
@@ -21,8 +17,7 @@ int main(int c, char *v[])
     while (robo.avanca(Direcao::Direita) != Status::NaoAvancou) {
         // desenha o espaço na tela
         sala.mostra(std::cout);
-        // Espera 250 ms entre cada movimentação dentro do
-        // do labirinto.
+        // Espera 250 ms entre cada movimentação do robô
         espera(PASSO);
     }
 
