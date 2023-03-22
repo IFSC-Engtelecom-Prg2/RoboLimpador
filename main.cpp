@@ -10,13 +10,17 @@ int main(int c, char *v[])
     // Cria um espaço com 16 colunas e 16 linhas, e 3 obstáculos
     Ambiente sala(16, 16, 3);
 
+//    sala.visita(Posicao{10,7});
+//    sala.mostra(std::cout);
+//    return 0;
+
     // Cria um robo, que deve percorrer o ambiente especificado
     Robo robo(sala);
 
     // enquanto conseguir avançar para a direita ...
     while (robo.avanca(Direcao::Direita) != Status::NaoAvancou) {
         // desenha o espaço na tela
-        sala.mostra();
+        sala.mostra(std::cout);
         // Espera 250 ms entre cada movimentação dentro do
         // do labirinto.
         espera(PASSO);
@@ -24,7 +28,7 @@ int main(int c, char *v[])
 
     // enquanto conseguir avançar para cima ...
     while (robo.avanca(Direcao::Acima) != Status::NaoAvancou) {
-        sala.mostra();
+        sala.mostra(std::cout);
         espera(PASSO);
     }
 

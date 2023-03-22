@@ -7,6 +7,8 @@
 
 #include <cstdint>
 #include <vector>
+#include <ostream>
+#include <optional>
 
 struct Posicao {
     uint8_t x,y;
@@ -15,7 +17,8 @@ struct Posicao {
 enum class PosStatus:uint8_t {
     Livre,
     Visitada,
-    Obstaculo
+    Obstaculo,
+    Invalida
 };
 
 
@@ -25,7 +28,7 @@ public:
     ~Ambiente();
 
     // desenha o espaço na tela, incluindo as posições já visitadas pelo robô
-    void mostra() const;
+    void mostra(std::ostream & out) const;
 
     // Verifica a posição. Resultado:
     //  PosStatus::Livre: posição ainda não foi visitada
@@ -44,10 +47,12 @@ private:
     std::vector<PosStatus> area;
     uint8_t lin, col;
 
-    uint32_t calc_pos(const Posicao & pos) const;
+    std::optional<uint32_t> calc_pos(const Posicao & pos) const;
 };
 
 // faz uma pausa
 void espera(uint32_t milissegundos);
+
+void bloco(std::ostream & out);
 
 #endif //ROBO_AMBIENTE_H

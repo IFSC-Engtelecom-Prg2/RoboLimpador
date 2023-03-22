@@ -36,18 +36,22 @@ Status Robo::avanca(Direcao dir, bool volta) {
         case Direcao::Direita: {
             pos.y += 1;
             status = tenta_mover(pos);
+            break;
         }
         case Direcao::Esquerda: {
             pos.y -= 1;
             status = tenta_mover(pos);
+            break;
         }
         case Direcao::Acima: {
             pos.x -= 1;
             status = tenta_mover(pos);
+            break;
         }
         case Direcao::Abaixo: {
             pos.x += 1;
             status = tenta_mover(pos);
+            break;
         }
     }
     return status;
