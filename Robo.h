@@ -9,7 +9,6 @@
 
 // resultado de um movimento no labirinto
 enum class Status:uint8_t {
-    Chegou,
     Avancou,
     NaoAvancou
 };
@@ -27,9 +26,6 @@ public:
     Robo(Ambiente & espaco);
     ~Robo();
 
-    // testa se terminou a limpeza (varreu completamente o espaço)
-    bool terminou() const;
-
     // obtém a posição atual no espaço a ser limpo
     Posicao obtem_posicao() const;
 
@@ -41,10 +37,12 @@ public:
     // volta: se true, limpa a casa para onde se avançou. Isso pode ser usado para retroceder no espaço
     // Resultado: um valor do tipo enum Status (ver acima), indicando se:
     //    Status::Avancou: avançou-se na direção solicitada
-    //    Status::Chegou: terminou a limpeza
     //    Status::NaoAvancou: não foi possível avançar na direção solicitada (tem um obstáculo)
     Status avanca(Direcao dir, bool volta=false);
-
+private:
+    Ambiente & espaco;
+    Posicao pos_atual;
+    uint32_t passos;
 };
 
 

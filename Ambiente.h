@@ -6,6 +6,7 @@
 #define ROBO_AMBIENTE_H
 
 #include <cstdint>
+#include <vector>
 
 struct Posicao {
     uint8_t x,y;
@@ -16,6 +17,7 @@ enum class PosStatus:uint8_t {
     Visitada,
     Obstaculo
 };
+
 
 class Ambiente {
 public:
@@ -37,6 +39,12 @@ public:
     //  PosStatus::Obstaculo: posição contém um obstáculo
     PosStatus visita(const Posicao & pos);
 
+    Posicao obtem_dimensoes() const;
+private:
+    std::vector<PosStatus> area;
+    uint8_t lin, col;
+
+    uint32_t calc_pos(const Posicao & pos) const;
 };
 
 // faz uma pausa
