@@ -60,7 +60,6 @@ private:
 
     std::optional<uint32_t> calc_pos(const Posicao & pos) const;
     void desenha_topo(int colunas) const;
-    char status_para_letra(const PosStatus & pos) const;
     void desenha_linha(iterador inicio, iterador fim, bool ultima) const;
 };
 

@@ -16,18 +16,19 @@ void Ambiente::desenha_topo(int colunas) const {
     printf("%lc\n", glyph[6]);
 }
 
-char Ambiente::status_para_letra(const PosStatus & pos) const {
-    switch (pos) {
-        case PosStatus::Obstaculo:
-            return 'O';
-        case PosStatus::Visitada:
-            return 'X';
-        default:
-            return ' ';
-    }
-}
-
 void Ambiente::desenha_linha(iterador inicio, iterador fim, bool ultima) const {
+    // lambda para conversão
+    auto status_para_letra = [](const PosStatus & pos) {
+        switch (pos) {
+            case PosStatus::Obstaculo:
+                return 'O';
+            case PosStatus::Visitada:
+                return 'X';
+            default:
+                return ' ';
+        }
+    };
+
     printf("%lc", glyph[1]);
     for (auto it=inicio; it != fim; it++) {
         printf("%c%lc", status_para_letra(*it), glyph[1]);
