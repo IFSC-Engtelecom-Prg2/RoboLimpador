@@ -8,19 +8,7 @@
 #include <stdexcept>
 #include <string>
 
-#define DOUBLE_SPACE 0
-
-#if DOUBLE_SPACE
-#       define SPC "　"
-#else
-#       define SPC " "
-#endif
-
-constexpr static wchar_t glyph[] = L"" SPC "│││─┘┐┤─└┌├─┴┬┼" SPC "┆┆┆┄╯╮ ┄╰╭ ┄";
-
-using iterador = std::vector<PosStatus>::const_iterator;
-
-void desenha_topo(int colunas) {
+void Ambiente::desenha_topo(int colunas) const {
     printf("%lc%lc", glyph[10], glyph[8]);
     for (auto i=colunas-1; i > 0; i--) {
         printf("%lc%lc", glyph[14], glyph[8]);
@@ -28,7 +16,7 @@ void desenha_topo(int colunas) {
     printf("%lc\n", glyph[6]);
 }
 
-char status_para_letra(const PosStatus & pos) {
+char Ambiente::status_para_letra(const PosStatus & pos) const {
     switch (pos) {
         case PosStatus::Obstaculo:
             return 'O';
@@ -39,7 +27,7 @@ char status_para_letra(const PosStatus & pos) {
     }
 }
 
-void desenha_linha(iterador inicio, iterador fim, bool ultima) {
+void Ambiente::desenha_linha(iterador inicio, iterador fim, bool ultima) const {
     printf("%lc", glyph[1]);
     for (auto it=inicio; it != fim; it++) {
         printf("%c%lc", status_para_letra(*it), glyph[1]);
@@ -51,27 +39,6 @@ void desenha_linha(iterador inicio, iterador fim, bool ultima) {
         printf("%lc%lc", glyph[8],sep);
     }
     printf("\n");
-}
-
-void bloco(std::ostream & out) {
-    std::vector<PosStatus> v = {PosStatus::Obstaculo, PosStatus::Livre, PosStatus::Visitada, PosStatus::Visitada};
-
-    setlocale(LC_ALL, "");
-//    for (int j=0; j < 20; j++) {
-//        printf("%u: %lc\n", j, glyph[j]);
-//    }
-    // desenha o topo
-    desenha_topo(v.size());
-//    printf("%lc%lc", glyph[10], glyph[8]);
-//    for (int i=0; i < v.size()-1; i++) {
-//        printf("%lc%lc", glyph[14], glyph[8]);
-//    }
-//    printf("%lc\n", glyph[6]);
-
-    desenha_linha(v.begin(), v.end(), false);
-    desenha_linha(v.begin(), v.end(), false);
-    desenha_linha(v.begin(), v.end(), true);
-    return;
 }
 
 void espera(uint32_t milissegundos) {

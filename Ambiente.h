@@ -47,7 +47,21 @@ private:
     std::vector<PosStatus> area;
     uint8_t lin, col;
 
+#define DOUBLE_SPACE 0
+
+#if DOUBLE_SPACE
+#       define SPC "　"
+#else
+#       define SPC " "
+#endif
+
+    using iterador = std::vector<PosStatus>::const_iterator;
+    constexpr static wchar_t glyph[] = L"" SPC "│││─┘┐┤─└┌├─┴┬┼" SPC "┆┆┆┄╯╮ ┄╰╭ ┄";
+
     std::optional<uint32_t> calc_pos(const Posicao & pos) const;
+    void desenha_topo(int colunas) const;
+    char status_para_letra(const PosStatus & pos) const;
+    void desenha_linha(iterador inicio, iterador fim, bool ultima) const;
 };
 
 // faz uma pausa
